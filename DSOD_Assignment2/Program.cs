@@ -11,6 +11,8 @@ namespace DSOD_Assignment2
         static void Main(string[] args)
         {
             Console.WriteLine("check");
+            Console.WriteLine("check");
+
         }
     }
 }
