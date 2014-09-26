@@ -9,7 +9,7 @@ namespace DSOD_Assignment2
     class OrderClass
     {
         int senderid, cardNo, receiverID, amount;
-        public string setorder(int senderid, int cardNo, int receiverID, int amount)
+        public string setorder(int senderid, int cardNo, int receiverID, int amount)//setting the order
         {
             this.senderid = senderid;
             this.cardNo = cardNo;
