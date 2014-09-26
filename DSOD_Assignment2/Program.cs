@@ -14,7 +14,7 @@ namespace DSOD_Assignment2
         {
             hs.priceCutEvent += new HotelSupplier.priceCutDelegate(TravelAgency.check);
 
-
+            hs.orderProcessing();
             Thread hotelHilton = new Thread(new ThreadStart(hs.runHotelSupplier));
             Thread hotelHoliday = new Thread(new ThreadStart(hs.runHotelSupplier));
             hotelHoliday.Name = "Holiday Inn";

@@ -44,6 +44,14 @@ namespace DSOD_Assignment2
                 changePrice(newprice);
             }
         }
+        public void orderProcessing()
+        {
+            BankReference.Service1Client bankProxy = new BankReference.Service1Client();
+            long cno = 1600160016001600;
+            if (bankProxy.ValidCard(cno))
+                Console.WriteLine("Card Accepted");
+            else Console.WriteLine("Card Declined");
+        }
         public Int32 getPrice()
         {
             return oldPrice;
