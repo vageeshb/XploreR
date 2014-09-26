@@ -27,10 +27,11 @@ namespace DSOD_Assignment2
                 Thread.Sleep(1000);
                 int p = hs.getPrice();
                 Console.WriteLine("The current price of a hotel room {0} is ${1}", Thread.CurrentThread.Name, p);
-                if(s==1)//s is similar to semaphore variable. It will be initialized to 0 in hetelsupplier class and is incremented to 1 only when a pricecut event occurs
+                if(s==1)//s is similar to semaphore variable. It will be initialized to 0 in hotelsupplier class and is incremented to 1 only when a pricecut event occurs
                 {
-                    placeorder();
                     s--;
+                    placeorder();
+               
                 }
             }
         }
