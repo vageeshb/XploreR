@@ -11,7 +11,7 @@ namespace DSOD_Assignment2
     {
         public delegate void priceCutDelegate(Int32 p);
         public  event priceCutDelegate priceCutEvent;
-        [ThreadStatic] private  Int32 oldPrice = 100;
+        [ThreadStatic] private  Int32 oldPrice ;
         [ThreadStatic] private  Int32 basePrice ;
         Random amount = new Random();
         private Int32 pricingModel()
@@ -34,9 +34,17 @@ namespace DSOD_Assignment2
         public void runHotelSupplier()
         {
             if (Thread.CurrentThread.Name ==  "Hilton")
+            {
                 basePrice = 500;
+                oldPrice = 500;
+            }
+                
             else
+            {
                 basePrice = 100;
+                oldPrice = 100;
+            }
+                
             for (Int32 i = 0; i < 10; i++)
             {
                 Int32 newprice = pricingModel();
