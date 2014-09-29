@@ -13,7 +13,8 @@ namespace DSOD_Assignment2
         int senderid, cardNo, receiverID, amount, price;
         string Order, EncodedOrder;
         OrderClass oc = new OrderClass();
-        EncoderDecoder ed = new EncoderDecoder();
+        // Created static methods, so no need to create instances
+        //EncoderDecoder ed = new EncoderDecoder();
         //MultiCellBuffer mcb = new MultiCellBuffer();
          public void TravelAgency(int senderID, int receiverID, int cardNo)
         {
@@ -36,8 +37,8 @@ namespace DSOD_Assignment2
         {
             this.price = price;
             amount = rng.Next(5, 10);
-            Order= oc.setorder(senderid, cardNo, receiverID, amount);
-            EncodedOrder = ed.getencodedorder(Order);
+            Order = oc.setorder(senderid, cardNo, receiverID, amount);
+            EncodedOrder = EncoderDecoder.getEncodedOrder();
             //mcb.retrieveorder(EncodedOrder);
         }
     
