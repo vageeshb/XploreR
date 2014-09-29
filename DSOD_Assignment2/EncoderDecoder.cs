@@ -8,19 +8,19 @@ namespace DSOD_Assignment2
 {
     class EncoderDecoder
     {
-        public static string getEncodedOrder()
+        // Encode the order
+        public static string Encode(string order)
         {
-            try
-            {
-                // Getting the order from the buffer
-                string order = Program.mcb.getOneCell();
+            // Debugging
+            Console.WriteLine("Got the order : " + order);
 
-                // Debugging
-                Console.WriteLine("Got the order : " + order);
-                
-                // Encrypt the order and send to the retailers
-                return Encrypt(order, "ABCDEFGHIJKLMNOP");
-            }
+            // Encrypt the order and send to the retailers
+            return Encrypt(order, "ABCDEFGHIJKLMNOP");
+        }
+
+        // Decode the order
+        public static string Decode(string order) {
+            return Decrypt(order, "ABCDEFGHIJKLMNOP");
         }
 
         // Ecrypt the Order Object

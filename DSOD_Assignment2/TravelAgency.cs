@@ -9,17 +9,16 @@ namespace DSOD_Assignment2
 {
     class TravelAgency
     {
-        static Random rng= new Random();
-        int senderid, cardNo, receiverID, amount, price;
-        string Order, EncodedOrder;
-        OrderClass oc = new OrderClass();
+        static Random rng = new Random();
+        int senderId, cardNo, receiverId, amount, price;
+        string EncodedOrder;
         // Created static methods, so no need to create instances
         //EncoderDecoder ed = new EncoderDecoder();
         //MultiCellBuffer mcb = new MultiCellBuffer();
          public void TravelAgency(int senderID, int receiverID, int cardNo)
         {
-            this.senderid = senderID;
-            this.receiverID = receiverID;
+            this.senderId = senderID;
+            this.receiverId = receiverID;
             this.cardNo = cardNo;
         }
         public void AgencyFunc()//thread function of agency
@@ -37,9 +36,9 @@ namespace DSOD_Assignment2
         {
             this.price = price;
             amount = rng.Next(5, 10);
-            Order = oc.setorder(senderid, cardNo, receiverID, amount);
-            EncodedOrder = EncoderDecoder.getEncodedOrder();
-            //mcb.retrieveorder(EncodedOrder);
+            OrderClass Order = new OrderClass(senderId, cardNo, receiverId, amount);
+            EncodedOrder = EncoderDecoder.Encode(Order.getOrder());
+            Program.mcb.setOneCell(EncodedOrder);
         }
     
     }
