@@ -12,14 +12,18 @@ namespace DSOD_Assignment2
         public static string Encode(string order)
         {
             // Debugging
-            Console.WriteLine("Got the order : " + order);
+            Console.WriteLine("Sent the order : " + order);
 
             // Encrypt the order and send to the retailers
             return Encrypt(order, "ABCDEFGHIJKLMNOP");
         }
 
         // Decode the order
-        public static string Decode(string order) {
+        public static string Decode(string order) 
+        {
+            // Debugging
+            Console.WriteLine("Got the order : " + order);
+            
             return Decrypt(order, "ABCDEFGHIJKLMNOP");
         }
 

@@ -36,14 +36,15 @@ namespace DSOD_Assignment2
 
             }
 
-            hotelSupplier.Join();
-
             for (int i = 0; i < 3; i++)  // N =  3 here
             {
                 agencies[i].Join();
             }
 
+            hotelSupplier.Join();
+            
             Console.ReadKey();
+            Console.WriteLine("Press any key to continue!");
 
 
         }

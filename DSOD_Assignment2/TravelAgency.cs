@@ -15,28 +15,28 @@ namespace DSOD_Assignment2
         // Created static methods, so no need to create instances
         //EncoderDecoder ed = new EncoderDecoder();
         //MultiCellBu\ffer mcb = new MultiCellBuffer();
-         public TravelAgency(int s, int r, int c)
+         public TravelAgency(int s, int c)
         {
             senderId = s;
-            receiverId = r;
             cardNo = c;
         }
         public void AgencyFunc()//thread function of agency
         {
-            HotelSupplier hs = new HotelSupplier();
-            for(int i=0; i<10; i++)
-            {
-                Thread.Sleep(1000);
-                int p = hs.getPrice();
-                Console.WriteLine("The current price of a hotel room {0} is ${1}", Thread.CurrentThread.Name, p);
-            }
+            Console.WriteLine("Started Travel Agency: {0}", Thread.CurrentThread.Name);
+            //HotelSupplier hs = new HotelSupplier();
+            //for(int i=0; i<10; i++)
+            //{
+            //    Thread.Sleep(1000);
+            //    int p = hs.getPrice();
+            //    //Console.WriteLine("The current price of a hotel room {0} is ${1}", Thread.CurrentThread.Name, p);
+            //}
         }
 
-        public void placeorder(int price)//EventHandler Class
+        public void placeorder(int price, string receiverId)//EventHandler Class
         {
             this.price = price;
             amount = rng.Next(5, 10);
-            OrderClass Order = new OrderClass(senderId, cardNo, receiverId, amount);
+            OrderClass Order = new OrderClass(senderId, cardNo, Convert.ToInt32(receiverId), amount);
             EncodedOrder = EncoderDecoder.Encode(Order.getOrder());
             Program.mcb.setOneCell(EncodedOrder);
         }
