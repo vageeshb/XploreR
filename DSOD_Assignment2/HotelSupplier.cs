@@ -11,14 +11,12 @@ namespace DSOD_Assignment2
     {
         public delegate void priceCutDelegate(Int32 p, String name);
         public  event priceCutDelegate priceCutEvent;
-        [ThreadStatic] private  Int32 oldPrice ;
-        [ThreadStatic] private  Int32 basePrice ;
+        private  Int32 oldPrice = 100 ;
+        
         Random amount = new Random();
         private Int32 pricingModel()
         {
-            int var = basePrice / 2;
-            
-            Int32 newprice = amount.Next(basePrice - var, basePrice + var);
+            Int32 newprice = amount.Next(50,100);
             return newprice;
         }
         public void changePrice(Int32 newprice)
@@ -26,25 +24,14 @@ namespace DSOD_Assignment2
             if (newprice < oldPrice)
             {
                 if (priceCutEvent != null)
-                    priceCutEvent(newprice);
+                    priceCutEvent(newprice,Thread.CurrentThread.Name );
             }
             oldPrice = newprice;
                 
         }
         public void runHotelSupplier()
         {
-            if (Thread.CurrentThread.Name ==  "Hilton")
-            {
-                basePrice = 500;
-                oldPrice = 500;
-            }
-                
-            else
-            {
-                basePrice = 100;
-                oldPrice = 100;
-            }
-                
+                          
             for (Int32 i = 0; i < 10; i++)
             {
                 Int32 newprice = pricingModel();
@@ -63,6 +50,10 @@ namespace DSOD_Assignment2
         public Int32 getPrice()
         {
             return oldPrice;
+        }
+        public void orderProcessed(String order)
+        {
+
         }
 
     }
