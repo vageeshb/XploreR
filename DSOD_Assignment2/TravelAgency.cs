@@ -36,10 +36,14 @@ namespace DSOD_Assignment2
         {
             this.price = price;
             amount = rng.Next(5, 10);
-            OrderClass Order = new OrderClass(senderId, cardNo, receiverId, amount);
+            DateTime CurrentDate;
+            CurrentDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));
+            Console.WriteLine("Order placed at: " + CurrentDate);
+            OrderClass Order = new OrderClass(senderId, cardNo, receiverId, amount, CurrentDate);
             EncodedOrder = EncoderDecoder.Encode(Order.getOrder());
             Program.mcb.setOneCell(EncodedOrder);
-        }
+
+         }
     
     }
 }
