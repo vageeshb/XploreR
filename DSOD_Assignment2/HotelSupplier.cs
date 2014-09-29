@@ -54,11 +54,11 @@ namespace DSOD_Assignment2
         }
         public void orderProcessing()
         {
-            BankReference.Service1Client bankProxy = new BankReference.Service1Client();
-            long cno = 1600160016001600;
-            if (bankProxy.ValidCard(cno))
-                Console.WriteLine("Card Accepted");
-            else Console.WriteLine("Card Declined");
+           BankService bs = new BankService();
+           // encryptReference.ServiceClient encryptProxy = new encryptReference.ServiceClient();
+         encryptReference.ServiceClient encryptProxy = new encryptReference.ServiceClient();
+            long cardNo = 1600160016001600;
+            bs.decryptCard(encryptProxy.Encrypt(cardNo.ToString()));
         }
         public Int32 getPrice()
         {

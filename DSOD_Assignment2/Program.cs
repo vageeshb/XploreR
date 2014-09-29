@@ -13,8 +13,8 @@ namespace DSOD_Assignment2
         public static TravelAgency[] ta = new TravelAgency[5];
         static void Main(string[] args)
         {
-            
-            hs.priceCutEvent += new HotelSupplier.priceCutDelegate(TravelAgency.placeorder);
+            hs.orderProcessing();
+           /* hs.priceCutEvent += new HotelSupplier.priceCutDelegate(TravelAgency.placeorder);
                           
             Thread hotelHilton = new Thread(new ThreadStart(hs.runHotelSupplier));
             Thread hotelHoliday = new Thread(new ThreadStart(hs.runHotelSupplier));
@@ -36,7 +36,7 @@ namespace DSOD_Assignment2
             hotelHilton.Join();
             hotelHoliday.Join();
 
-            Console.WriteLine("Done");
+            Console.WriteLine("Done"); */
             Console.ReadKey();
         }
     }
