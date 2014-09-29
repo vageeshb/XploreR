@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="BankService.cs" />
     <Compile Include="HotelSupplier.cs" />
+    <Compile Include="EncoderDecoder.cs" />
+    <Compile Include="MultiCellBuffer.cs" />
     <Compile Include="OrderClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

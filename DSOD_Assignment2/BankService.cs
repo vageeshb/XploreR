@@ -8,14 +8,14 @@ namespace DSOD_Assignment2
 {
     class BankService
     {
-        public void decryptCard(string encyptedNo)
+        public Boolean decryptCard(string encyptedNo)
         {
         encryptReference.ServiceClient decryptProxy = new encryptReference.ServiceClient();
             BankRef.Service1Client bankProxy = new BankRef.Service1Client();
          long cardNo = Convert.ToInt64( decryptProxy.Decrypt(encyptedNo));
-            if (bankProxy.ValidCard(cardNo))
-                Console.WriteLine("Card Accepted");
-            else Console.WriteLine("Card Declined");
+         if (bankProxy.ValidCard(cardNo))
+             return true;
+         else return false;
 
         }
     }

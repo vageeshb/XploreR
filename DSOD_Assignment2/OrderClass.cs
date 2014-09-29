@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +9,19 @@ namespace DSOD_Assignment2
     class OrderClass
     {
         int senderid, cardNo, receiverID, amount;
-        public string setorder(int senderid, int cardNo, int receiverID, int amount)//setting the order
+        DateTime timeOfPlaced;
+        public OrderClass(int senderid, int cardNo, int receiverID, int amount, DateTime timeOfPlaced)
         {
             this.senderid = senderid;
             this.cardNo = cardNo;
             this.receiverID = receiverID;
             this.amount = amount;
-            return "senderid" + senderid + "cardNo" + cardNo + "receiverID" + receiverID + "amount" + amount;
+            this.timeOfPlaced = timeOfPlaced;
+        }
+
+        public string getOrder()
+        {
+            return senderid + "," + cardNo + "," + receiverID + "," + amount + "," + timeOfPlaced;
         }
     }
 }
