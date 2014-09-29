@@ -10,16 +10,16 @@ namespace DSOD_Assignment2
     class TravelAgency
     {
         static Random rng = new Random();
-        int senderId, cardNo, receiverId, amount, price;
+        private int senderId, cardNo, receiverId, amount, price;
         string EncodedOrder;
         // Created static methods, so no need to create instances
         //EncoderDecoder ed = new EncoderDecoder();
-        //MultiCellBuffer mcb = new MultiCellBuffer();
-         public void TravelAgency(int senderID, int receiverID, int cardNo)
+        //MultiCellBu\ffer mcb = new MultiCellBuffer();
+         public TravelAgency(int s, int r, int c)
         {
-            this.senderId = senderID;
-            this.receiverId = receiverID;
-            this.cardNo = cardNo;
+            senderId = s;
+            receiverId = r;
+            cardNo = c;
         }
         public void AgencyFunc()//thread function of agency
         {
