@@ -12,7 +12,8 @@ namespace DSOD_Assignment2
         private int numOfCells;
         private int index = -1;
         private string[] bufferArray;
-
+        public static delegate void orderPlaced(string order);
+        public static event orderPlaced orderPlacedEvent;
         // Constructor to initialize the number of cells and the buffer array
         public MultiCellBuffer(int numOfCells)
         {
@@ -20,7 +21,7 @@ namespace DSOD_Assignment2
             bufferArray = new string[numOfCells];
         }
 
-        public string getOneCell()
+        public string getOneCell(Int32 index)
         {
             string cell = null;
             // Block the cell buffer

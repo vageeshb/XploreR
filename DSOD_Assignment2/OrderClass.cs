@@ -9,17 +9,19 @@ namespace DSOD_Assignment2
     class OrderClass
     {
         int senderid, cardNo, receiverID, amount;
-        public OrderClass(int senderid, int cardNo, int receiverID, int amount)
+        DateTime timeOfPlaced;
+        public OrderClass(int senderid, int cardNo, int receiverID, int amount, DateTime timeOfPlaced)
         {
             this.senderid = senderid;
             this.cardNo = cardNo;
             this.receiverID = receiverID;
             this.amount = amount;
+            this.timeOfPlaced = timeOfPlaced;
         }
 
         public string getOrder()
         {
-            return "senderId:" + senderid + ", cardNo:" + cardNo + ", receiverId:" + receiverID + ", Amount:" + amount;
+            return senderid + "," + cardNo + "," + receiverID + "," + amount + "," + timeOfPlaced;
         }
     }
 }
