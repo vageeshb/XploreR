@@ -14,8 +14,31 @@ namespace DSOD_Assignment2
         public static TravelAgency agency3 = new TravelAgency();
         public static TravelAgency agency4 = new TravelAgency();
         public static TravelAgency agency5 = new TravelAgency();
+        
         static void Main(string[] args)
         {
+            ChickenFarm chicken = new ChickenFarm();
+
+            Thread farmer = new Thread(new ThreadStart(chicken.farmerFunc));
+
+            farmer.Start();         // Start one farmer thread
+
+            Retailer chickenstore = new Retailer();
+
+            ChickenFarm.priceCut += new priceCutEvent(chickenstore.chickenOnSale);
+
+            Thread[] retailers = new Thread[3];
+
+            for (int i = 0; i < 3; i++)  // N =  3 here
+            {   // Start N retailer threads
+
+                retailers[i] = new Thread(new ThreadStart(chickenstore.retailerFunc));
+
+                retailers[i].Name = (i + 1).ToString();
+
+                retailers[i].Start();
+
+            }
 
         }
     }
