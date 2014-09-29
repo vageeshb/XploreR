@@ -11,8 +11,10 @@ namespace DSOD_Assignment2
     {
         private int numOfCells;
         private int index = -1;
+        private static Semaphore s= new Semaphore(1,1);
         private string[] bufferArray;
-
+        public static delegate void orderPlaced(string order);
+        public static event orderPlaced orderPlacedEvent;
         // Constructor to initialize the number of cells and the buffer array
         public MultiCellBuffer(int numOfCells)
         {
@@ -20,16 +22,16 @@ namespace DSOD_Assignment2
             bufferArray = new string[numOfCells];
         }
 
-        public string getOneCell()
+        public string getOneCell(Int32 index)
         {
             string cell = null;
             // Block the cell buffer
-            lock (this)
-            {
+            //lock (this)  lock is not required for getOneCell
+           // {
                 // Wait if there is nothing in the buffer
                 while (isEmpty())
                 {
-                    Monitor.Wait(this);
+                    Monitor.Wait(this);//could not find semaphore function for wait, so using monitor
                 }
 
                 // Cell was filled, fetch the cell value and reduce the index value
@@ -37,8 +39,8 @@ namespace DSOD_Assignment2
                 index--;
 
                 // Let all other blocked threads know that this one has finished locking
-                Monitor.PulseAll(this);
-            }
+                //Monitor.PulseAll(this);
+            //}
 
             return cell;
         }
@@ -46,8 +48,8 @@ namespace DSOD_Assignment2
         public void setOneCell(string cell)
         {
             // Block the cell buffer
-            lock (this)
-            {
+            s.WaitOne();
+            
                 // Wait if the buffer is full
                 while (isFull())
                 {
@@ -60,7 +62,7 @@ namespace DSOD_Assignment2
                 
 
                 // Let all other blocked threads know that this one has finished locking
-                Monitor.PulseAll(this);
+                s.Release();
             }
         }
 
