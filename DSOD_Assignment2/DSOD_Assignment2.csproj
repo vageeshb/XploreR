@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankService.cs" />
     <Compile Include="HotelSupplier.cs" />
     <Compile Include="EncoderDecoder.cs" />
     <Compile Include="MultiCellBuffer.cs" />
@@ -50,6 +51,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BankReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\bankService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -71,12 +77,26 @@
     <None Include="Service References\BankReference\Service12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\bankService\DSOD_Assignment2.bankService.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\bankService\Service1.wsdl" />
+    <None Include="Service References\bankService\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\bankService\Service11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\bankService\Service12.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BankReference\" />
+    <WCFMetadataStorage Include="Service References\bankService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BankReference\Service1.disco" />
@@ -89,6 +109,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BankReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\bankService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\bankService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\bankService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

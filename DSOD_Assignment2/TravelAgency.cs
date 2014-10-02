@@ -10,7 +10,10 @@ namespace DSOD_Assignment2
     class TravelAgency
     {
         static Random rng = new Random();
-        private int senderId, cardNo, receiverId, amount, price;
+        Program pg = new Program();
+        Thread[] agencies = new Thread[3];
+        private int senderId, cardNo, amount, price;
+        string receiverId;
         string EncodedOrder;
         // Created static methods, so no need to create instances
         //EncoderDecoder ed = new EncoderDecoder();
@@ -20,19 +23,24 @@ namespace DSOD_Assignment2
             senderId = s;
             cardNo = c;
         }
-        public void AgencyFunc()//thread function of agency
+        public void priceCut(int price, string receiverId)//eventhandler
         {
-            Console.WriteLine("Started Travel Agency: {0}", Thread.CurrentThread.Name);
-            //HotelSupplier hs = new HotelSupplier();
-            //for(int i=0; i<10; i++)
-            //{
-            //    Thread.Sleep(1000);
-            //    int p = hs.getPrice();
-            //    //Console.WriteLine("The current price of a hotel room {0} is ${1}", Thread.CurrentThread.Name, p);
-            //}
+            this.price = price;
+            this.receiverId = receiverId;
+            for (int i = 0; i < 5; i++)
+            {
+                agencies[i] = new Thread(() => placeorder(price, receiverId));
+
+                agencies[i].Name = (i + 1).ToString();
+
+                agencies[i].Start();
+
+            }
         }
 
-        public void placeorder(int price, string receiverId)//EventHandler Class
+            
+
+        public void placeorder(int price, string receiverId)
         {
             this.price = price;
             amount = rng.Next(5, 10);

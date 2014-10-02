@@ -10,31 +10,23 @@ namespace DSOD_Assignment2
     class Program
     {
         public static MultiCellBuffer mcb = new MultiCellBuffer(3);
-        
+
         static void Main(string[] args)
         {
             HotelSupplier supplier = new HotelSupplier();
 
             Thread hotelSupplier = new Thread(new ThreadStart(supplier.runHotelSupplier));
 
-            hotelSupplier.Start();         // Start one farmer thread
+            hotelSupplier.Start();         // Start one HotelSupplier thread
 
-            TravelAgency agency = new TravelAgency(1, 2, 3);
+            TravelAgency agency = new TravelAgency(1, 3);
 
             supplier.priceCutEvent += new HotelSupplier.priceCutDelegate(agency.placeorder);
+            MultiCellBuffer.orderPlacedEvent += new MultiCellBuffer.orderPlaced(supplier.newOrderPlaced);
 
             Thread[] agencies = new Thread[3];
 
-            for (int i = 0; i < 3; i++)  // N =  3 here
-            {   // Start N retailer threads
-
-                agencies[i] = new Thread(new ThreadStart(agency.AgencyFunc));
-
-                agencies[i].Name = (i + 1).ToString();
-
-                agencies[i].Start();
-
-            }
+            
 
             for (int i = 0; i < 3; i++)  // N =  3 here
             {
@@ -42,7 +34,7 @@ namespace DSOD_Assignment2
             }
 
             hotelSupplier.Join();
-            
+
             Console.ReadKey();
             Console.WriteLine("Press any key to continue!");
 

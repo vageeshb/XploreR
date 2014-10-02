@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace DSOD_Assignment2
 {
-    class MultiCellBuffer
+        class MultiCellBuffer
     {
         private int numOfCells;
         private int index = -1;
@@ -59,12 +59,11 @@ namespace DSOD_Assignment2
                 // Cell space was empty, increase the index value and fill the cell
                 index++;
                 bufferArray[index] = cell;
-                
-
+                orderPlacedEvent(cell);
                 // Let all other blocked threads know that this one has finished locking
                 s.Release();
             }
-        }
+        
 
         public bool isEmpty()
         {
@@ -76,3 +75,4 @@ namespace DSOD_Assignment2
         }
     }
 }
+
