@@ -22,6 +22,8 @@ namespace DSOD_Assignment2
             TravelAgency agency = new TravelAgency(1, 2, 3);
 
             supplier.priceCutEvent += new HotelSupplier.priceCutDelegate(agency.placeorder);
+            
+            mcb.orderPlacedEvent += new MultiCellBuffer.orderPlaced(hotelSupplier.newOrderPlaced);
 
             Thread[] agencies = new Thread[3];
 

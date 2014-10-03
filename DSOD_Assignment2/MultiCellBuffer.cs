@@ -10,10 +10,10 @@ namespace DSOD_Assignment2
     class MultiCellBuffer
     {
         private int numOfCells;
-        private int index = -1;
-        private string[] bufferArray;
-        public static delegate void orderPlaced(string order);
-        public static event orderPlaced orderPlacedEvent;
+        public int index = -1;
+        public string[] bufferArray;
+        public delegate void orderPlaced(int index);
+        public event orderPlaced orderPlacedEvent;
         // Constructor to initialize the number of cells and the buffer array
         public MultiCellBuffer(int numOfCells)
         {
@@ -21,7 +21,7 @@ namespace DSOD_Assignment2
             bufferArray = new string[numOfCells];
         }
 
-        public string getOneCell(Int32 index)
+        public string getOneCell(int index)
         {
             string cell = null;
             // Block the cell buffer
@@ -58,7 +58,8 @@ namespace DSOD_Assignment2
                 // Cell space was empty, increase the index value and fill the cell
                 index++;
                 bufferArray[index] = cell;
-                
+
+                orderPlacedEvent(index);
 
                 // Let all other blocked threads know that this one has finished locking
                 Monitor.PulseAll(this);
