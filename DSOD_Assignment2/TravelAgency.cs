@@ -10,35 +10,41 @@ namespace DSOD_Assignment2
     class TravelAgency
     {
         static Random rng = new Random();
-        private int senderId, cardNo, receiverId, amount, price;
+        Program pg = new Program();
+        
+        private int amount, price;
+        string senderId, receiverId;
         string EncodedOrder;
-        // Created static methods, so no need to create instances
-        //EncoderDecoder ed = new EncoderDecoder();
-        //MultiCellBu\ffer mcb = new MultiCellBuffer();
-         public TravelAgency(int s, int c)
+        
+        public void priceCut(int price, string receiverId)//eventhandler
         {
-            senderId = s;
-            cardNo = c;
-        }
-        public void AgencyFunc()//thread function of agency
-        {
-            Console.WriteLine("Started Travel Agency: {0}", Thread.CurrentThread.Name);
-            //HotelSupplier hs = new HotelSupplier();
-            //for(int i=0; i<10; i++)
-            //{
-            //    Thread.Sleep(1000);
-            //    int p = hs.getPrice();
-            //    //Console.WriteLine("The current price of a hotel room {0} is ${1}", Thread.CurrentThread.Name, p);
-            //}
-        }
+            Console.WriteLine("Price Cut event for Hotel Supplier : {0}", receiverId);
+            
+             
+                 this.price = price;
+                 this.receiverId = receiverId;
+                 Int64 cardNo = 1001;
+                 for (int i = 0; i < 5; i++)
+                 {
+                     Program.agencies[i] = new Thread(() => placeorder(price, receiverId, cardNo++));
 
-        public void placeorder(int price, string receiverId)//EventHandler Class
+                     Program.agencies[i].Name = "TA_" + (i + 1).ToString();
+
+                     Program.agencies[i].Start();
+
+                 }
+
+             
+         }
+
+        public void placeorder(int price, string receiverId, long cardNo)
         {
             this.price = price;
             amount = rng.Next(5, 10);
-            DateTime currentDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));
-            Console.WriteLine("Order placed at : {0}", currentDate);
-            OrderClass Order = new OrderClass(senderId, cardNo, Convert.ToInt32(receiverId), amount, currentDate);
+            senderId = Thread.CurrentThread.Name;
+            DateTime currentDate = DateTime.Now;
+            Console.WriteLine("Order placed by Travel Agency {0} at : {1}", Thread.CurrentThread.Name, currentDate);
+            OrderClass Order = new OrderClass(senderId, cardNo, receiverId, amount, currentDate);
             EncodedOrder = EncoderDecoder.Encode(Order.getOrder());
             Program.mcb.setOneCell(EncodedOrder);
         }

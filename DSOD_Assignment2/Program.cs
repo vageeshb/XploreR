@@ -10,45 +10,42 @@ namespace DSOD_Assignment2
     class Program
     {
         public static MultiCellBuffer mcb = new MultiCellBuffer(3);
-        
+        public static Thread[] hotelsuppliers = new Thread[3];
+        public static Thread[] agencies = new Thread[5];
+
         static void Main(string[] args)
         {
             HotelSupplier supplier = new HotelSupplier();
-
-            Thread hotelSupplier = new Thread(new ThreadStart(supplier.runHotelSupplier));
-
-            hotelSupplier.Start();         // Start one farmer thread
-
-            TravelAgency agency = new TravelAgency(1, 2, 3);
-
-            supplier.priceCutEvent += new HotelSupplier.priceCutDelegate(agency.placeorder);
             
-            mcb.orderPlacedEvent += new MultiCellBuffer.orderPlaced(hotelSupplier.newOrderPlaced);
-
-            Thread[] agencies = new Thread[3];
-
-            for (int i = 0; i < 3; i++)  // N =  3 here
-            {   // Start N retailer threads
-
-                agencies[i] = new Thread(new ThreadStart(agency.AgencyFunc));
-
-                agencies[i].Name = (i + 1).ToString();
-
-                agencies[i].Start();
-
-            }
-
-            for (int i = 0; i < 3; i++)  // N =  3 here
+            for (int i = 0; i < 3; i++)
             {
-                agencies[i].Join();
+                hotelsuppliers[i] = new Thread(new ThreadStart(supplier.runHotelSupplier));
+
+                hotelsuppliers[i].Name = "HS_" + (i + 1).ToString();
+
+                hotelsuppliers[i].Start();
+
             }
 
-            hotelSupplier.Join();
+            TravelAgency agency = new TravelAgency();
             
+            supplier.priceCutEvent += new HotelSupplier.priceCutDelegate(agency.priceCut);
+            MultiCellBuffer.orderPlacedEvent += new MultiCellBuffer.orderPlaced(supplier.newOrderPlaced);
+            
+            for (int i = 0; i < 3; i++)
+            {
+                hotelsuppliers[i].Join();
+            }
+
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    agencies[i].Join();
+            //}
+
+            
+            Console.WriteLine("Experiment Completed.\nPress any key to continue!");
             Console.ReadKey();
-            Console.WriteLine("Press any key to continue!");
-
-
+            
         }
     }
 }

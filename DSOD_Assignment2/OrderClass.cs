@@ -8,9 +8,11 @@ namespace DSOD_Assignment2
 {
     class OrderClass
     {
-        int senderid, cardNo, receiverID, amount;
+        string senderid, receiverID;
+        int amount;
+        long cardNo;
         DateTime timeOfPlaced;
-        public OrderClass(int senderid, int cardNo, int receiverID, int amount, DateTime timeOfPlaced)
+        public OrderClass(string senderid, long cardNo, string receiverID, int amount, DateTime timeOfPlaced)
         {
             this.senderid = senderid;
             this.cardNo = cardNo;

@@ -11,20 +11,25 @@ namespace DSOD_Assignment2
         // Encode the order
         public static string Encode(string order)
         {
-            // Debugging
-            Console.WriteLine("Sent the order : " + order);
-
             // Encrypt the order and send to the retailers
-            return Encrypt(order, "ABCDEFGHIJKLMNOP");
+            string encryptedOrder = Encrypt(order, "ABCDEFGHIJKLMNOP");
+            Console.WriteLine("Encrypted order from \"{0}\" to \"{1}\"" , order, encryptedOrder);
+
+            return encryptedOrder;
+            
         }
 
         // Decode the order
         public static string Decode(string order) 
         {
+            string decryptedOrder = Decrypt(order, "ABCDEFGHIJKLMNOP");
             // Debugging
-            Console.WriteLine("Got the order : " + order);
-            
-            return Decrypt(order, "ABCDEFGHIJKLMNOP");
+            Console.WriteLine("Decrypted order from \"{0}\" to \"{1}\"", order, decryptedOrder);
+            string[] orderParts = decryptedOrder.Split(',');
+
+            OrderClass newOrder = new OrderClass(orderParts[0], Convert.ToInt64(orderParts[1]), orderParts[2], Convert.ToInt32(orderParts[3]), Convert.ToDateTime(orderParts[4]));
+
+            return newOrder.getOrder();
         }
 
         // Ecrypt the Order Object

@@ -31,7 +31,8 @@ namespace bankService
         }
         public Boolean ValidCard(long cardno)
         {
-            return (Math.Floor(Math.Log10(cardno) + 1) == 16);
+            
+            return true;
         }
     }
 }

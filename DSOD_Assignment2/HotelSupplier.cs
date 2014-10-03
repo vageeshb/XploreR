@@ -9,45 +9,67 @@ namespace DSOD_Assignment2
     
     class HotelSupplier
     {
-        public delegate void priceCutDelegate(Int32 p, string threadName);
-        public  event priceCutDelegate priceCutEvent;
-        private  Int32 oldPrice = 100;
+        public delegate void priceCutDelegate(Int32 p, string id);
+        public event priceCutDelegate priceCutEvent;
+        private Int32 oldPrice = 100;
+        private static int priceCutCounter = 0;
         Random amount = new Random();
         private Int32 pricingModel()
         {
-            Int32 newprice = amount.Next(50, 150);
+            Int32 newprice = amount.Next(50, 100);
             return newprice;
         }
         public void changePrice(Int32 newprice)
         {
-            if (newprice < oldPrice)
+            lock (this)
             {
-                if (priceCutEvent != null)
-                    priceCutEvent(newprice, Thread.CurrentThread.Name);
+                if (newprice < oldPrice)
+                {
+                    if (priceCutEvent != null)
+                    {
+                        priceCutCounter++;
+                        priceCutEvent(newprice, Thread.CurrentThread.Name);
+                        Thread.Sleep(new Random().Next(1, 10) * 100);
+                    }
+                }
+                oldPrice = newprice;
             }
-            oldPrice = newprice;
-                
+
         }
         public void runHotelSupplier()
         {
-            for (Int32 i = 0; i < 10; i++)
+            while(priceCutCounter < 2)
             {
                 Int32 newprice = pricingModel();
-                Console.WriteLine("Hotel {0}: Old Price is {1}, New Price is {2}", Thread.CurrentThread.Name, oldPrice, newprice );
+                Console.WriteLine("New Price is ${0} for hotel {1}.", newprice, Thread.CurrentThread.Name);
                 changePrice(newprice);
             }
         }
-        public void orderProcessing()
-        {
-            BankReference.Service1Client bankProxy = new BankReference.Service1Client();
-            long cno = 1600160016001600;
-            if (bankProxy.ValidCard(cno))
-                Console.WriteLine("Card Accepted");
-            else Console.WriteLine("Card Declined");
-        }
+
         public Int32 getPrice()
         {
             return oldPrice;
+        }
+        public void newOrderPlaced(int index)
+        {
+            String encodedOrder = Program.mcb.getOneCell(index);
+            string[] parts = EncoderDecoder.Decode(encodedOrder).Split(',');
+            BankService bs = new BankService();
+            encryptReference.ServiceClient encryptProxy = new encryptReference.ServiceClient();
+            string cardNo = parts[1];
+            string receiverId = parts[2];
+            
+            if (bs.isValid(encryptProxy.Encrypt(cardNo)))
+            {
+                DateTime completeDate = DateTime.Now;
+                Console.WriteLine("Order confirmed at : {0}", completeDate);
+                TimeSpan orderProcessingTime = completeDate.Subtract(Convert.ToDateTime(parts[4]));
+                Console.WriteLine("Total time taken is : {0}", orderProcessingTime);
+            }
+            else
+            {
+                Console.WriteLine("Invalid Credit Card provided! Order cannot be completed!\n");
+            }
         }
 
     }
