@@ -9,7 +9,7 @@ namespace DSOD_Assignment2
     
     class HotelSupplier
     {
-        public delegate void priceCutDelegate(Int32 p, String name);
+        public delegate void priceCutDelegate(Int32 p, int id);
         public event priceCutDelegate priceCutEvent;
         private Int32 oldPrice = 100;
 
@@ -24,19 +24,21 @@ namespace DSOD_Assignment2
             if (newprice < oldPrice)
             {
                 if (priceCutEvent != null)
-                    priceCutEvent(newprice, Thread.CurrentThread.Name);
+                    priceCutEvent(newprice, Thread.CurrentThread.ManagedThreadId);
             }
             oldPrice = newprice;
 
         }
         public void runHotelSupplier()
         {
-
-            for (Int32 i = 0; i < 10; i++)
+            lock (this)
             {
-                Int32 newprice = pricingModel();
-                Console.WriteLine("New Price is {0} for hotel {1}", newprice, Thread.CurrentThread.Name);
-                changePrice(newprice);
+                for (Int32 i = 0; i < 10; i++)
+                {
+                    Int32 newprice = pricingModel();
+                    Console.WriteLine("New Price is {0} for hotel {1}", newprice, Thread.CurrentThread.Name);
+                    changePrice(newprice);
+                }
             }
         }
 

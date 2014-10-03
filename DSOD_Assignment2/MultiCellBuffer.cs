@@ -51,6 +51,8 @@ namespace DSOD_Assignment2
             s.WaitOne();
             
                 // Wait if the buffer is full
+            lock (this)
+            {
                 while (isFull())
                 {
                     Monitor.Wait(this);
@@ -61,6 +63,7 @@ namespace DSOD_Assignment2
                 bufferArray[index] = cell;
                 orderPlacedEvent(index);
                 // Let all other blocked threads know that this one has finished locking
+            }
                 s.Release();
             }
         
