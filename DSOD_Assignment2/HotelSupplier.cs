@@ -44,17 +44,17 @@ namespace DSOD_Assignment2
         {
             return oldPrice;
         }
-        public void newOrderPlaced(string cell)
+        public void newOrderPlaced(int index)
         {
 
-            String encodedOrder = Program.mcb.getOneCell(cell);
+            String encodedOrder = Program.mcb.getOneCell(index);
             string[] parts = EncoderDecoder.Decode(encodedOrder).Split(',');
             BankService bs = new BankService();
             // encryptReference.ServiceClient encryptProxy = new encryptReference.ServiceClient();
             encryptReference.ServiceClient encryptProxy = new encryptReference.ServiceClient();
             if (Thread.CurrentThread.Name == parts[2])
             {
-                Program.mcb.deleteCell(cell);
+                //Program.mcb.deleteCell(cell);
                 if (bs.decryptCard(encryptProxy.Encrypt(parts[1])))
                 {
                     DateTime completeDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));

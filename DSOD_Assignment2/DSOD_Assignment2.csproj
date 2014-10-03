@@ -50,12 +50,12 @@
     <Compile Include="OrderClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\BankReference\Reference.cs">
+    <Compile Include="Service References\BankRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\bankService\Reference.cs">
+    <Compile Include="Service References\encryptReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -64,30 +64,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Service References\BankReference\DSOD_Assignment2.BankReference.CompositeType.datasource">
+    <None Include="Service References\BankRef\DSOD_Assignment2.BankRef.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\BankReference\Service1.wsdl" />
-    <None Include="Service References\BankReference\Service1.xsd">
+    <None Include="Service References\BankRef\Service1.wsdl" />
+    <None Include="Service References\BankRef\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BankReference\Service11.xsd">
+    <None Include="Service References\BankRef\Service11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BankReference\Service12.xsd">
+    <None Include="Service References\BankRef\Service12.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\bankService\DSOD_Assignment2.bankService.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\bankService\Service1.wsdl" />
-    <None Include="Service References\bankService\Service1.xsd">
+    <None Include="Service References\encryptReference\Service.wsdl" />
+    <None Include="Service References\encryptReference\Service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\bankService\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\bankService\Service12.xsd">
+    <None Include="Service References\encryptReference\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -95,32 +89,32 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\BankReference\" />
-    <WCFMetadataStorage Include="Service References\bankService\" />
+    <WCFMetadataStorage Include="Service References\BankRef\" />
+    <WCFMetadataStorage Include="Service References\encryptReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BankReference\Service1.disco" />
+    <None Include="Service References\BankRef\Service1.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BankReference\configuration91.svcinfo" />
+    <None Include="Service References\BankRef\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BankReference\configuration.svcinfo" />
+    <None Include="Service References\BankRef\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BankReference\Reference.svcmap">
+    <None Include="Service References\BankRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\bankService\configuration91.svcinfo" />
+    <None Include="Service References\encryptReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\bankService\configuration.svcinfo" />
+    <None Include="Service References\encryptReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\bankService\Reference.svcmap">
+    <None Include="Service References\encryptReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

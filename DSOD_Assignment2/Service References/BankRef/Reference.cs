@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DSOD_Assignment2.bankService {
+namespace DSOD_Assignment2.BankRef {
     using System.Runtime.Serialization;
     using System;
     
@@ -75,7 +75,7 @@ namespace DSOD_Assignment2.bankService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="bankService.IService1")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BankRef.IService1")]
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
@@ -91,19 +91,19 @@ namespace DSOD_Assignment2.bankService {
         System.Threading.Tasks.Task<bool> ValidCardAsync(long cardno);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        DSOD_Assignment2.bankService.CompositeType GetDataUsingDataContract(DSOD_Assignment2.bankService.CompositeType composite);
+        DSOD_Assignment2.BankRef.CompositeType GetDataUsingDataContract(DSOD_Assignment2.BankRef.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<DSOD_Assignment2.bankService.CompositeType> GetDataUsingDataContractAsync(DSOD_Assignment2.bankService.CompositeType composite);
+        System.Threading.Tasks.Task<DSOD_Assignment2.BankRef.CompositeType> GetDataUsingDataContractAsync(DSOD_Assignment2.BankRef.CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : DSOD_Assignment2.bankService.IService1, System.ServiceModel.IClientChannel {
+    public interface IService1Channel : DSOD_Assignment2.BankRef.IService1, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<DSOD_Assignment2.bankService.IService1>, DSOD_Assignment2.bankService.IService1 {
+    public partial class Service1Client : System.ServiceModel.ClientBase<DSOD_Assignment2.BankRef.IService1>, DSOD_Assignment2.BankRef.IService1 {
         
         public Service1Client() {
         }
@@ -140,11 +140,11 @@ namespace DSOD_Assignment2.bankService {
             return base.Channel.ValidCardAsync(cardno);
         }
         
-        public DSOD_Assignment2.bankService.CompositeType GetDataUsingDataContract(DSOD_Assignment2.bankService.CompositeType composite) {
+        public DSOD_Assignment2.BankRef.CompositeType GetDataUsingDataContract(DSOD_Assignment2.BankRef.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<DSOD_Assignment2.bankService.CompositeType> GetDataUsingDataContractAsync(DSOD_Assignment2.bankService.CompositeType composite) {
+        public System.Threading.Tasks.Task<DSOD_Assignment2.BankRef.CompositeType> GetDataUsingDataContractAsync(DSOD_Assignment2.BankRef.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
     }
