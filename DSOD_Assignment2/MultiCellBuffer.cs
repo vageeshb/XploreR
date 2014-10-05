@@ -7,14 +7,12 @@ using System.Threading;
 
 namespace DSOD_Assignment2
 {
-        class MultiCellBuffer
+    class MultiCellBuffer
     {
         private int numOfCells;
         private int index = -1;
-        private static Semaphore s= new Semaphore(3,3);
         private string[] bufferArray;
-        public delegate void orderPlaced(int index);
-        public static event orderPlaced orderPlacedEvent;
+        
         // Constructor to initialize the number of cells and the buffer array
         public MultiCellBuffer(int numOfCells)
         {
@@ -22,34 +20,27 @@ namespace DSOD_Assignment2
             bufferArray = new string[numOfCells];
         }
 
-        public string getOneCell(int index)
+        // Getter function to get one cell
+        public string getOneCell()
         {
             string cell = null;
-            // Block the cell buffer
-            //lock (this)  lock is not required for getOneCell
-           // {
-                // Wait if there is nothing in the buffer
+            lock (this)
+            {
+                // Wait if the cells are empty
                 while (isEmpty())
                 {
-                    Monitor.Wait(this);//could not find semaphore function for wait, so using monitor
+                    Monitor.Wait(this);
                 }
-
-                // Cell was filled, fetch the cell value and reduce the index value
+                
+                // Cell was filled, fetch the cell value
                 cell = bufferArray[index];
-                index--;
-
-                // Let all other blocked threads know that this one has finished locking
-                //Monitor.PulseAll(this);
-            //}
-
+                Monitor.PulseAll(this);
+            }
             return cell;
         }
 
         public void setOneCell(string cell)
         {
-            // Block the cell buffer
-            s.WaitOne();
-            
             // Wait if the buffer is full
             lock (this)
             {
@@ -61,18 +52,27 @@ namespace DSOD_Assignment2
                 // Cell space was empty, increase the index value and fill the cell
                 index++;
                 bufferArray[index] = cell;
-                orderPlacedEvent(index);
-                // Let all other blocked threads know that this one has finished locking
+                Monitor.PulseAll(this);
             }
             
-            s.Release();
         }
-        
 
+        // Utility function to delete cell
+        public void deleteCell()
+        {
+            lock (this)
+            {
+                index--;
+            }
+        }
+
+        // Utility function to see if cells are empty
         public bool isEmpty()
         {
             return index == -1;
         }
+
+        // Utility function to see if cells are full
         public bool isFull()
         {
             return index == numOfCells - 1;

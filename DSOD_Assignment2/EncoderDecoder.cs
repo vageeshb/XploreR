@@ -13,8 +13,6 @@ namespace DSOD_Assignment2
         {
             // Encrypt the order and send to the retailers
             string encryptedOrder = Encrypt(order, "ABCDEFGHIJKLMNOP");
-            Console.WriteLine("Encrypted order from \"{0}\" to \"{1}\"" , order, encryptedOrder);
-
             return encryptedOrder;
             
         }
@@ -22,13 +20,12 @@ namespace DSOD_Assignment2
         // Decode the order
         public static string Decode(string order) 
         {
+            // Decrypting the order
             string decryptedOrder = Decrypt(order, "ABCDEFGHIJKLMNOP");
-            // Debugging
-            Console.WriteLine("Decrypted order from \"{0}\" to \"{1}\"", order, decryptedOrder);
             string[] orderParts = decryptedOrder.Split(',');
-
-            OrderClass newOrder = new OrderClass(orderParts[0], Convert.ToInt64(orderParts[1]), orderParts[2], Convert.ToInt32(orderParts[3]), Convert.ToDateTime(orderParts[4]));
-
+            
+            // Generating order object
+            OrderClass newOrder = new OrderClass(orderParts[0], Convert.ToInt64(orderParts[1]), orderParts[2], Convert.ToInt32(orderParts[3]), Convert.ToDateTime(orderParts[4]), Convert.ToInt32(orderParts[5]));
             return newOrder.getOrder();
         }
 
